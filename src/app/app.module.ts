@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { ErrorHandlingService } from './services/error-handling.service';
+import { ApiGatewayService } from './services/api-gateway.service';
 
 
 @NgModule({
@@ -12,7 +14,10 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    {provide:ErrorHandler, useClass:ErrorHandlingService}
+    ,ApiGatewayService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
