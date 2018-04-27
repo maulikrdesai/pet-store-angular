@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/h
 import { ApiResponse } from '../models/api.models';
 import { Observable } from 'rxjs/Observable';
 import { Pet, Category } from '../models/pet.store.models';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,8 +15,6 @@ const urlEncodingCodec: HttpUrlEncodingCodec = new HttpUrlEncodingCodec();
 @Injectable()
 export class ApiGatewayService {
 
-  urlBase: string = "http://mdesai.tps.main:8080";
-
   constructor(private http: HttpClient) {
   }
 
@@ -25,12 +24,12 @@ export class ApiGatewayService {
    */
   getPets(category?: Category): Observable<ApiResponse<Pet[]>> {
     if (category != null && category.id > 0)
-      return this.doApiGET(this.urlBase + "/pets?categoryId=" + category.id);
-    return this.doApiGET(this.urlBase + "/pets");
+      return this.doApiGET("/pets?categoryId=" + category.id);
+    return this.doApiGET("/pets");
   }
 
-  private doApiGET(url): Observable<ApiResponse<any>> {
-    return <Observable<ApiResponse<any>>>this.http.get(url, httpOptions);
+  private doApiGET(path): Observable<ApiResponse<any>> {
+    return <Observable<ApiResponse<any>>>this.http.get(environment.urlBase + path, httpOptions);
   }
 
 }
