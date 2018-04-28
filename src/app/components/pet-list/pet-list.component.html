@@ -1,3 +1,8 @@
-<p>
-  pet-list works!
-</p>
+<div class="jumbotron text-center">
+  <h3>Welcome to Pet-Store</h3>
+  <div *ngIf="pets" class="container">
+    <a *ngFor="let pet of pets" routerLink="/pets/{{pet.id}}">
+      <img class="pet-picture" alt="{{pet.name}}" src="{{pet.photoUrls[0]}}">
+    </a>
+  </div>
+</div>

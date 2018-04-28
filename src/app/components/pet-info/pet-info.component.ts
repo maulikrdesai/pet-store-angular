@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiGatewayService } from '../../services/api-gateway.service';
+import { ActivatedRoute } from '@angular/router';
+import { Pet } from '../../models/pet.store.models';
 
 @Component({
   selector: 'pet-info',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetInfoComponent implements OnInit {
 
-  constructor() { }
+  pet: Pet;
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute
+    , private apiGateway: ApiGatewayService) { }
+
+  ngOnInit(): void {
+    let id: number = +this.route.snapshot.paramMap.get('id');
+    this.apiGateway.getPet(id).subscribe(data => this.pet = data.result);
   }
 
 }

@@ -28,6 +28,11 @@ export class ApiGatewayService {
     return this.doApiGET("/pets");
   }
 
+
+  getPet(petId:number): Observable<ApiResponse<Pet>> {
+    return this.doApiGET("/pets/" + petId);
+  }
+
   private doApiGET(path): Observable<ApiResponse<any>> {
     return <Observable<ApiResponse<any>>>this.http.get(environment.urlBase + path, httpOptions);
   }

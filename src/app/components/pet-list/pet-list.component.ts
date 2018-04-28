@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiGatewayService } from '../../services/api-gateway.service';
+import { Pet } from '../../models/pet.store.models';
 
 @Component({
   selector: 'pet-list',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetListComponent implements OnInit {
 
-  constructor() { }
+  pets: Pet[];
+
+  constructor(private apiGateway: ApiGatewayService) { }
 
   ngOnInit() {
+    this.apiGateway.getPets().subscribe(data => this.pets = data.result);
   }
-
 }
