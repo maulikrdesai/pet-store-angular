@@ -20,6 +20,7 @@ export class PetEditorComponent implements OnInit {
     , tags: []
   };
   categories:Category[] = AvailableCategories;
+
   constructor(private route: ActivatedRoute, private petService: PetService) { }
 
   ngOnInit(): void {
@@ -29,22 +30,18 @@ export class PetEditorComponent implements OnInit {
   }
 
   addImageUrl(imageUrl: string) {
-    console.log("Adding Tag:" + imageUrl);
     this.pet.photoUrls.unshift(imageUrl);
   }
 
   removeImageUrl(imageUrl: string) {
-    console.log("Removeing Tag:" + imageUrl);
     this.pet.photoUrls = this.pet.photoUrls.filter(url => url != imageUrl);
   }
 
   addTag(tagName: string) {
-    console.log("Adding Tag:" + tagName);
     this.pet.tags.unshift({id:null, name:tagName});
   }
 
   removeTag(tagName: string) {
-    console.log("Removeing Tag:" + tagName);
     this.pet.tags = this.pet.tags.filter(tag => tag.name != tagName);
   }
 
