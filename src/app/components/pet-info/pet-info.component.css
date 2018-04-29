@@ -1,0 +1,8 @@
+.pet-picture{
+    max-height: 500px;
+}
+
+.pet-thumbnail{
+    max-height: 50px;
+    cursor: pointer;
+}

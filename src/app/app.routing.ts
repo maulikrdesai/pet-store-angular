@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     { path: 'pets', component: PetListComponent },
     { path: 'add-pet', component: PetEditorComponent },
     { path: 'edit-pet/:id', component: PetEditorComponent },
-    //{ path: 'pets/:id', component: PetInfoComponent },
+    { path: 'pets/:id', component: PetInfoComponent },
     { path: '**', redirectTo: '' }
 ];
 

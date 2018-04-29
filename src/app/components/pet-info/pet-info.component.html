@@ -1,7 +1,11 @@
 <div *ngIf="pet" class="container">
   <h1>Meet {{pet.name}}</h1>
-  AKA:<span *ngFor="let tag of pet.tags"> "{{tag.name}}" </span>
-  <img *ngFor="let phototUrl of pet.photoUrls" class="pet-picture" alt="{{pet.name}}" src="{{phototUrl}}">
+  <img class="img-fluid pet-picture" alt="{{pet.name}}" src="{{selectedPhotoUrl}}">
+
+  
+  <div class="container-fluid">
+      <img *ngFor="let phototUrl of pet.photoUrls" class="pet-thumbnail img-thumbnail"  #imgPhotoUrl (click)="changeSelectedPhoto(imgPhotoUrl.alt)" alt="{{phototUrl}}" src="{{phototUrl}}">
+  </div>
   <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary">Purchase</a>
   <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-primary">Return</a>
   <a (click)="delete()" class="btn btn-primary">Delete</a>

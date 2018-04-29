@@ -1,14 +1,14 @@
 <div class="card" style="width: 18em;">
-  <img *ngIf="pet.photoUrls" class="card-img-top pet-card-img" alt="{{pet.name}}" src="{{pet.photoUrls[0]}}">
+  <img *ngIf="pet.photoUrls" class="card-img-top pet-card-img" alt="{{pet.name}}" src="{{pet.photoUrls[0]}}" routerLink="/pets/{{pet.id}}">
   <div class="card-body">
     <h5 class="card-title">{{pet.name}}</h5>
-    <span class="card-text">You can also call it </span>
+    <span *ngIf="pet.tags && pet.tags.length > 0" class="card-text">You can also call it </span>
     <span class="badge badge-info" *ngFor="let tag of pet.tags"> {{tag.name}} </span>
   </div>
   <div class="card-footer">
-    <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary" href="#">Purchase</a>
-    <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-primary" href="#">Return</a>
-    <a (click)="delete()" class="btn btn-primary" href="#">Delete</a>
+    <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary" >Purchase</a>
+    <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-primary" >Return</a>
+    <a (click)="delete()" class="btn btn-primary" >Delete</a>
     <a routerLink="/edit-pet/{{pet.id}}" class="btn btn-primary">Edit</a>
   </div>
 </div>
