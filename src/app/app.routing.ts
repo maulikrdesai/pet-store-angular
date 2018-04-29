@@ -8,7 +8,7 @@ const appRoutes: Routes = [
     { path: '', component: PetListComponent },
     { path: 'about', component: AboutPetStoreComponent },
     { path: 'pets', component: PetListComponent },
-    { path: 'pets/:id', component: PetInfoComponent },
+    //{ path: 'pets/:id', component: PetInfoComponent },
     { path: '**', redirectTo: '' }
 ];
 

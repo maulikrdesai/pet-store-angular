@@ -1,10 +1,9 @@
-<h3>Welcome to Pet-Store</h3>
-<div *ngIf="pets" class="container">
-  <div *ngFor="let pet of pets" class="col-sm-4">
-    <div class="card" style="width: 18rem;">
-      <a routerLink="/pets/{{pet.id}}">
-        <img *ngIf="pet.photoUrls" class="card-img-top" alt="{{pet.name}}" src="{{pet.photoUrls[0]}}">
-      </a>
-    </div>
+<div *ngIf="pets" class="container-fluid">
+  <div class="card-columns">
+      <pet-card *ngFor="let pet of pets" [pet]="pet" 
+        (deleted)="onPetDeleted($event)" 
+        (sold)="onPetSold($event)" 
+        (returned)="onPetReturned($event)">
+      </pet-card>
   </div>
 </div>

@@ -17,6 +17,7 @@ import { PetListComponent } from './components/pet-list/pet-list.component';
 import { PetInfoComponent } from './components/pet-info/pet-info.component';
 import { PetEditorComponent } from './components/pet-editor/pet-editor.component';
 import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-store.component';
+import { PetCardComponent } from './components/pet-card/pet-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-s
     , AboutPetStoreComponent
     , PetEditorComponent
     , AlertComponent
+    , PetCardComponent
   ],
   imports: [
     BrowserModule
