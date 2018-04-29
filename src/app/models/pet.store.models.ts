@@ -1,9 +1,9 @@
 export interface Pet {
     id: number;
-    category: Category;
+    category?: Category;
     name: string;
-    photoUrls?: string[];
-    status: string;
+    photoUrls: string[];
+    status?: string;
     tags?: Tag[];
 }
 export interface Category {
@@ -15,3 +15,8 @@ export interface Tag {
     id: number;
     name: string;
 }
+
+export const AvailableCategories: Category[] = [
+    { id: 1, name: "Dog" }
+    , { id: 2, name: "Cat" }
+    , { id: 3, name: "Python" }];

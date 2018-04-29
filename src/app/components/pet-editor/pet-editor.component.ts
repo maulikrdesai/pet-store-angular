@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Pet, Category } from '../../models/pet.store.models';
+import { Pet, Category, AvailableCategories } from '../../models/pet.store.models';
 import { PetService } from '../../services/pet.service';
 import { debug } from 'util';
 
@@ -13,17 +13,13 @@ export class PetEditorComponent implements OnInit {
 
   pet: Pet = {
     id: null
-    , name: ""
+    , name: null
     , category: null
     , photoUrls: []
     , status: "AVAILABLE"
+    , tags: []
   };
-
-  categories: Category[] = [
-    { id: 1, name: "Dog" }
-    ,{ id: 2, name: "Cat" }
-    ,{ id: 3, name: "Python" }];
-
+  categories:Category[] = AvailableCategories;
   constructor(private route: ActivatedRoute, private petService: PetService) { }
 
   ngOnInit(): void {
@@ -38,6 +34,14 @@ export class PetEditorComponent implements OnInit {
 
   removeImageUrl(imageUrl: string) {
     this.pet.photoUrls = this.pet.photoUrls.filter(url => url != imageUrl);
+  }
+
+  addTag(tagName: string) {
+    this.pet.tags.unshift({id:null, name:tagName});
+  }
+
+  removeTag(tagName: string) {
+    this.pet.tags = this.pet.tags.filter(tag => tag.name != tagName);
   }
 
   savePet() {

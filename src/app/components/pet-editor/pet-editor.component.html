@@ -1,6 +1,6 @@
 <form (submit)="savePet();" #petForm="ngForm">
   <div *ngIf="pet" class="form-group row">
-    <label for="inputPetId" class="col-sm-2 col-form-label">Pet-Id</label>
+    <label for="inputPetId" class="col-sm-2 col-form-label">ID</label>
     <div class="col-sm-3">
       <input type="text" id="inputPetId" readonly class="form-control-plaintext" [value]="pet.id" name="pet.id">
     </div>
@@ -9,7 +9,7 @@
     <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
     <div class="col-sm-6">
       <select ngbDropdown ngbDropdownAnchor [(ngModel)]="pet.category" class="form-control col-sm-6" name="pet.category">
-        <option [ngValue]="undefined">
+        <option [ngValue]="null">
           Please Select
         </option>
         <option *ngFor="let category of categories;" [ngValue]="category">
@@ -38,6 +38,14 @@
       </div>
       <img *ngFor="let photoUrl of pet.photoUrls; let i = index;" #imgPhotoUrl (click)="removeImageUrl(imgPhotoUrl.src)" src="{{photoUrl}}"
         alt="{{photoUrl}}" class="img-thumbnail form-thumnail">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputTag" class="col-sm-2 col-form-label">Tags</label>
+    <div class="col-sm-10">
+      <input *ngIf="pet.tags.length < 5" type="text" #inputTag id="inputTag" class="form-control" placeholder="tag it..." (change)="addTag(inputTag.value)"
+        maxlength="4000" #tag>
+      <span *ngFor="let tag of pet.tags; let i = index;" #tagName (click)="removeTag(tagName.value)" class="badge badge-primary">{{tag.name}}</span>
     </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid || pet.photoUrls.length == 0">Submit</button>

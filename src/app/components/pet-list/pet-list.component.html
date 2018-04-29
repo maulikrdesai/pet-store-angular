@@ -1,9 +1,7 @@
-<div *ngIf="pets" class="container-fluid">
-  <div class="card-columns">
-      <pet-card *ngFor="let pet of pets" [pet]="pet" 
-        (deleted)="onPetDeleted($event)" 
-        (sold)="onPetSold($event)" 
-        (returned)="onPetReturned($event)">
-      </pet-card>
-  </div>
+<div *ngIf="pets" class="card-deck">
+    <pet-card *ngFor="let pet of pets" [pet]="pet" 
+      (deleted)="onPetDeleted($event)" 
+      (sold)="onPetSold($event)" 
+      (returned)="onPetReturned($event)">
+    </pet-card>
 </div>
