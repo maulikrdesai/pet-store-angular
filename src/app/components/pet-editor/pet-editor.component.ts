@@ -13,7 +13,7 @@ export class PetEditorComponent implements OnInit {
 
   pet: Pet;
   categories: Category[] = AvailableCategories;
-  selectedCategory: number;
+  selectedCategoryId: number;
 
   constructor(private route: ActivatedRoute, private petService: PetService) { }
 
@@ -27,29 +27,37 @@ export class PetEditorComponent implements OnInit {
   initializeView(pet: Pet) {
     this.pet = pet;
     if (this.pet.category)
-      this.selectedCategory = this.pet.category.id;
+      this.selectedCategoryId = this.pet.category.id;
   }
 
   savePet() {
+    this.pet.category = this.selectedCategory();
     if (this.pet.id > 0)
       this.petService.updatePet(this.pet.id, this.pet).subscribe(data => this.initializeView(data.result));
     else
       this.petService.addPet(this.pet).subscribe(data => this.initializeView(data.result));
   }
 
-  addImageUrl(imageUrl: string) {
+  selectedCategory(): Category {
+    let matches: Category[] = this.categories.filter(category => category.id == this.selectedCategoryId);
+    if (matches.length > 0)
+      return matches[0];
+    return null;
+  }
+
+  addImageUrl(imageUrl: string): void {
     this.pet.photoUrls.unshift(imageUrl);
   }
 
-  removeImageUrl(imageUrl: string) {
+  removeImageUrl(imageUrl: string): void {
     this.pet.photoUrls = this.pet.photoUrls.filter(url => url != imageUrl);
   }
 
-  addTag(tagName: string) {
+  addTag(tagName: string): void {
     this.pet.tags.unshift({ id: null, name: tagName });
   }
 
-  removeTag(tagName: string) {
+  removeTag(tagName: string): void {
     this.pet.tags = this.pet.tags.filter(tag => tag.name != tagName);
   }
 
