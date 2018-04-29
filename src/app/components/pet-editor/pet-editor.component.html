@@ -32,11 +32,11 @@
     <label for="inputPhotoUrl" class="col-sm-2 col-form-label">Photos</label>
     <div class="col-sm-10">
       <input *ngIf="pet.photoUrls.length < 5" type="text" #inputPhotoUrl id="inputPhotoUrl" class="form-control" placeholder="https://..."
-        (change)="addImageUrl(inputPhotoUrl.value)" maxlength="4000" #photoUrl>
+        (change)="addImageUrl(inputPhotoUrl.value)" maxlength="4000">
       <div *ngIf="pet.photoUrls != null && pet.photoUrls.length == 0" class="alert">
         No Photos Provided
       </div>
-      <img *ngFor="let photoUrl of pet.photoUrls; let i = index;" #imgPhotoUrl (click)="removeImageUrl(imgPhotoUrl.src)" src="{{photoUrl}}"
+      <img *ngFor="let photoUrl of pet.photoUrls; let i = index;" #imgPhotoUrl (click)="removeImageUrl(imgPhotoUrl.alt)" src="{{photoUrl}}"
         alt="{{photoUrl}}" class="img-thumbnail form-thumnail">
     </div>
   </div>
@@ -44,8 +44,8 @@
     <label for="inputTag" class="col-sm-2 col-form-label">Tags</label>
     <div class="col-sm-10">
       <input *ngIf="pet.tags.length < 5" type="text" #inputTag id="inputTag" class="form-control" placeholder="tag it..." (change)="addTag(inputTag.value)"
-        maxlength="4000" #tag>
-      <span *ngFor="let tag of pet.tags; let i = index;" #tagName (click)="removeTag(tagName.value)" class="badge badge-primary">{{tag.name}}</span>
+        maxlength="4000">
+      <span *ngFor="let tag of pet.tags; let i = index;" #spanTagName (click)="removeTag(spanTagName.textContent)" class="badge badge-primary">{{tag.name}}</span>
     </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid || pet.photoUrls.length == 0">Submit</button>
