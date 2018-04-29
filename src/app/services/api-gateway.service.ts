@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Authorization": "Basic b3duZXJAZXNwcmlkYS5jb206T3duZXIxMjM="
   })
 };
 const urlEncodingCodec: HttpUrlEncodingCodec = new HttpUrlEncodingCodec();
@@ -18,23 +17,20 @@ export class ApiGatewayService {
   constructor(private http: HttpClient) {
   }
 
-  /**
-   * GET /pets?categoryId=<categoryId>
-   * @param category 
-   */
-  getPets(category?: Category): Observable<ApiResponse<Pet[]>> {
-    if (category != null && category.id > 0)
-      return this.doApiGET("/pets?categoryId=" + category.id);
-    return this.doApiGET("/pets");
+  doApiDELETE(path): Observable<ApiResponse<any>> {
+    return <Observable<ApiResponse<any>>>this.http.delete(environment.urlBase + path, httpOptions);
   }
 
-
-  getPet(petId:number): Observable<ApiResponse<Pet>> {
-    return this.doApiGET("/pets/" + petId);
-  }
-
-  private doApiGET(path): Observable<ApiResponse<any>> {
+  doApiGET(path): Observable<ApiResponse<any>> {
     return <Observable<ApiResponse<any>>>this.http.get(environment.urlBase + path, httpOptions);
+  }
+
+  doApiPUT(path, body: any) {
+    return <Observable<ApiResponse<any>>>this.http.put(environment.urlBase + path, body, httpOptions);
+  }
+
+  doApiPOST(path, body: any) {
+    return <Observable<ApiResponse<any>>>this.http.post(environment.urlBase + path, body, httpOptions);
   }
 
 }

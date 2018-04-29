@@ -2,5 +2,8 @@
   <div *ngIf="pet" class="container">
       <h1>{{pet.name}}</h1>
       <img *ngFor="let phototUrl of pet.photoUrls" class="pet-picture" alt="{{pet.name}}" src="{{phototUrl}}">
+      <a (click)="purchase()" class="btn btn-primary {{pet.status=='AVAILABLE' ? '' : 'disabled'}}">{{pet.status=='AVAILABLE' ? 'Purchase' : 'Sold'}}</a>
+      <a (click)="return()" class="btn btn-primary {{pet.status=='SOLD' ? '' : 'disabled'}}">Return</a>
+      <a (click)="delete()" class="btn btn-primary">Delete</a>
   </div>
 </div>
