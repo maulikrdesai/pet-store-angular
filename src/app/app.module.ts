@@ -14,10 +14,10 @@ import { ErrorHandlingService } from './services/error-handling.service';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { PetListComponent } from './components/pet-list/pet-list.component';
+import { PetCardComponent } from './components/pet-card/pet-card.component';
 import { PetInfoComponent } from './components/pet-info/pet-info.component';
 import { PetEditorComponent } from './components/pet-editor/pet-editor.component';
 import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-store.component';
-import { PetCardComponent } from './components/pet-card/pet-card.component';
 
 @NgModule({
   declarations: [

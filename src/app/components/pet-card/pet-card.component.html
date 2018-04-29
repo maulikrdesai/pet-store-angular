@@ -6,9 +6,9 @@
     <p class="card-text" *ngFor="let tag of pet.tags">{{tag.name}}</p>
   </div>
   <div class="card-footer">
-    <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary">Purchase</a>
-    <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-secondary">Return</a>
-    <a (click)="delete()" class="btn btn-secondary">Delete</a>
-    <span class="glyphicon glyphicon-log-out">Hello</span>
+    <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary" href="#">Purchase</a>
+    <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-primary" href="#">Return</a>
+    <a (click)="delete()" class="btn btn-primary" href="#" >Delete</a>
+    <a routerLink="/edit-pet/{{pet.id}}" class="btn btn-primary">Edit</a>
   </div>
 </div>

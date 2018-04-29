@@ -26,7 +26,7 @@ export class PetCardComponent implements OnInit {
 
   purchase() {
     this.pet.status = "SOLD";
-    this.petService.updatePet(this.pet).subscribe(
+    this.petService.updatePet(this.pet.id, this.pet).subscribe(
       data => {
         this.pet = data.result;
         this.sold.emit(this.pet);
@@ -35,7 +35,7 @@ export class PetCardComponent implements OnInit {
 
   return() {
     this.pet.status = "AVAILABLE";
-    this.petService.updatePet(this.pet).subscribe(
+    this.petService.updatePet(this.pet.id, this.pet).subscribe(
       data => {
         this.pet = data.result;
         this.returned.emit(this.pet);

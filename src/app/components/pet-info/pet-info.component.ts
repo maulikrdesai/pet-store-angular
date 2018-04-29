@@ -21,12 +21,12 @@ export class PetInfoComponent implements OnInit {
 
   purchase() {
     this.pet.status = "SOLD";
-    this.petService.updatePet(this.pet).subscribe(data => this.pet = data.result);
+    this.petService.updatePet(this.pet.id,this.pet).subscribe(data => this.pet = data.result);
   }
 
   return() {
     this.pet.status = "AVAILABLE";
-    this.petService.updatePet(this.pet).subscribe(data => this.pet = data.result);
+    this.petService.updatePet(this.pet.id,this.pet).subscribe(data => this.pet = data.result);
   }
 
   delete() {

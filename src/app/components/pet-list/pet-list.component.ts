@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pet } from '../../models/pet.store.models';
 import { PetService } from '../../services/pet.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pet-list',
@@ -11,10 +12,15 @@ export class PetListComponent implements OnInit {
 
   pets: Pet[];
 
-  constructor(private petService: PetService) { }
+  constructor(private petService: PetService, private router:Router) { }
 
   ngOnInit() {
-    this.petService.getPets().subscribe(data => this.pets = data.result);
+    this.petService.getPets().subscribe(
+      data => {
+        this.pets = data.result;
+        if(this.pets.length == 0)
+          this.router.navigateByUrl("add-pet");
+      });
   }
 
   onPetDeleted(deletedPet: Pet) {

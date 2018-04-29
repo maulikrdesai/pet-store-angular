@@ -1,3 +1,44 @@
-<p>
-  pet-editor works!
-</p>
+<form (submit)="savePet();" #petForm="ngForm">
+  <div *ngIf="pet" class="form-group row">
+    <label for="inputPetId" class="col-sm-2 col-form-label">Pet-Id</label>
+    <div class="col-sm-3">
+      <input type="text" id="inputPetId" readonly class="form-control-plaintext" [value]="pet.id" name="pet.id">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+    <div class="col-sm-6">
+      <select ngbDropdown ngbDropdownAnchor [(ngModel)]="pet.category" class="form-control col-sm-6" name="pet.category">
+        <option [ngValue]="undefined">
+          Please Select
+        </option>
+        <option *ngFor="let category of categories;" [ngValue]="category">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-6">
+      <input type="text" id="inputName" class="form-control" placeholder="Name" [(ngModel)]="pet.name" name="pet.name" required
+        maxlength="500" #petName="ngModel">
+      <div *ngIf="petName.invalid && (petName.dirty || petName.touched)" class="alert alert-danger">
+        Provide a valid Name for the Pet
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPhotoUrl" class="col-sm-2 col-form-label">Photos</label>
+    <div class="col-sm-10">
+      <input *ngIf="pet.photoUrls.length < 5" type="text" #inputPhotoUrl id="inputPhotoUrl" class="form-control" placeholder="https://..."
+        (change)="addImageUrl(inputPhotoUrl.value)" maxlength="4000" #photoUrl>
+      <div *ngIf="pet.photoUrls != null && pet.photoUrls.length == 0" class="alert">
+        No Photos Provided
+      </div>
+      <img *ngFor="let photoUrl of pet.photoUrls; let i = index;" #imgPhotoUrl (click)="removeImageUrl(imgPhotoUrl.src)" src="{{photoUrl}}"
+        alt="{{photoUrl}}" class="img-thumbnail form-thumnail">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid || pet.photoUrls.length == 0">Submit</button>
+</form>

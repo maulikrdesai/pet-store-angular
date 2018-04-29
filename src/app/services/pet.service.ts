@@ -23,8 +23,8 @@ export class PetService {
     return this.apiGateway.doApiPOST("/pets/", pet);
   }
 
-  updatePet(pet: Pet): Observable<ApiResponse<Pet>> {
-    return this.apiGateway.doApiPUT("/pets/" + pet.id, pet);
+  updatePet(petId:number, pet: Pet): Observable<ApiResponse<Pet>> {
+    return this.apiGateway.doApiPUT("/pets/" + petId, pet);
   }
 
   deletePet(petId: number): Observable<ApiResponse<void>> {
