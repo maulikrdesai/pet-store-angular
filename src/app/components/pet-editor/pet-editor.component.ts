@@ -11,22 +11,30 @@ import { debug } from 'util';
 })
 export class PetEditorComponent implements OnInit {
 
-  pet: Pet = {
-    id: null
-    , name: null
-    , category: null
-    , photoUrls: []
-    , status: "AVAILABLE"
-    , tags: []
-  };
-  categories:Category[] = AvailableCategories;
+  pet: Pet;
+  categories: Category[] = AvailableCategories;
+  selectedCategory: number;
 
   constructor(private route: ActivatedRoute, private petService: PetService) { }
 
   ngOnInit(): void {
+    this.pet = new Pet();
     let id: number = +this.route.snapshot.paramMap.get('id');
     if (id > 0)
-      this.petService.getPet(id).subscribe(data => this.pet = data.result);
+      this.petService.getPet(id).subscribe(data => this.initializeView(data.result));
+  }
+
+  initializeView(pet: Pet) {
+    this.pet = pet;
+    if (this.pet.category)
+      this.selectedCategory = this.pet.category.id;
+  }
+
+  savePet() {
+    if (this.pet.id > 0)
+      this.petService.updatePet(this.pet.id, this.pet).subscribe(data => this.initializeView(data.result));
+    else
+      this.petService.addPet(this.pet).subscribe(data => this.initializeView(data.result));
   }
 
   addImageUrl(imageUrl: string) {
@@ -38,17 +46,11 @@ export class PetEditorComponent implements OnInit {
   }
 
   addTag(tagName: string) {
-    this.pet.tags.unshift({id:null, name:tagName});
+    this.pet.tags.unshift({ id: null, name: tagName });
   }
 
   removeTag(tagName: string) {
     this.pet.tags = this.pet.tags.filter(tag => tag.name != tagName);
   }
 
-  savePet() {
-    if (this.pet.id > 0)
-      this.petService.updatePet(this.pet.id, this.pet).subscribe(data => this.pet = data.result);
-    else
-      this.petService.addPet(this.pet).subscribe(data => this.pet = data.result);
-  }
 }

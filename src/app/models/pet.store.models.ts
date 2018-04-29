@@ -1,19 +1,20 @@
-export interface Pet {
-    id: number;
-    category?: Category;
-    name: string;
-    photoUrls: string[];
-    status?: string;
-    tags?: Tag[];
-}
-export interface Category {
-    id: number;
-    name: string;
+export class Pet {
+    id: number = null;
+    category?: Category = null;
+    name: string = null;
+    photoUrls: string[] = [];
+    status?: string = "AVAILABLE";
+    tags?: Tag[] = [];
 }
 
-export interface Tag {
-    id: number;
-    name: string;
+export class Category {
+    id: number = null;
+    name: string = null;
+}
+
+export class Tag {
+    id: number = null;
+    name: string = null;
 }
 
 export const AvailableCategories: Category[] = [
