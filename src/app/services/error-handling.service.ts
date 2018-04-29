@@ -1,12 +1,12 @@
-import { Injectable, ErrorHandler } from '@angular/core';
+import { Injectable, ErrorHandler, Output, EventEmitter } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertService } from './alert.service';
 import { ApiResponse } from '../models/api.models';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class ErrorHandlingService extends ErrorHandler {
 
-  constructor(private alertService: AlertService) {
+  constructor(private authService: AuthService) {
     super();
   }
 
@@ -14,7 +14,8 @@ export class ErrorHandlingService extends ErrorHandler {
     super.handleError(error);
     if (error instanceof HttpErrorResponse) {
       let errRes: HttpErrorResponse = (<HttpErrorResponse>error);
-      this.alertService.error("errRes.error.message");
+      if(errRes.status == 400)
+      this.authService.authRequired.next(true);
     }
   }
 }

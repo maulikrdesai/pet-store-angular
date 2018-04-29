@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { APP_ROUTING } from './app.routing';
@@ -18,6 +18,9 @@ import { PetCardComponent } from './components/pet-card/pet-card.component';
 import { PetInfoComponent } from './components/pet-info/pet-info.component';
 import { PetEditorComponent } from './components/pet-editor/pet-editor.component';
 import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-store.component';
+import { RequestInterceptor } from './services/auth/request.interceptor';
+import { AuthService } from './services/auth/auth.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-s
     , AboutPetStoreComponent
     , PetEditorComponent
     , AlertComponent
-    , PetCardComponent
+    , PetCardComponent, LoginComponent
   ],
   imports: [
     BrowserModule
@@ -38,9 +41,11 @@ import { AboutPetStoreComponent } from './components/about-pet-store/about-pet-s
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlingService }
+    , { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
     , ApiGatewayService
     , PetService
     , AlertService
+    , AuthService
   ],
   bootstrap: [AppComponent]
 })

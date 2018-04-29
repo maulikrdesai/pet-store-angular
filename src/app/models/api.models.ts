@@ -1,6 +1,6 @@
-export interface ApiResponse<T> {
-    status:String;
-	message:String;
+export class ApiResponse<T> {
+    status:string;
+	message:string;
 	timestamp:Date;
 	result:T;
 }
