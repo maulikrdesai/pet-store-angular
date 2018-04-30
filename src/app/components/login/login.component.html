@@ -1,3 +1,23 @@
-<p>
-  login works!
-</p>
+<form (submit)="login()" #loginForm="ngForm">
+  <div class="form-row">
+    <div class="input-group">
+      <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-3">
+        <input type="text" id="inputUsername" class="form-control" [(ngModel)]="username" name="username" required #uname="ngModel">
+        <div *ngIf="uname.invalid && (uname.dirty || uname.touched)" class="alert alert-danger">
+          Provide a username
+        </div>
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-3">
+        <input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" name="password" required #pwd="ngModel">
+        <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" class="alert alert-danger">
+          Please enter your password
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+</form>

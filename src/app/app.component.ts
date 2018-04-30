@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { PetService } from './services/pet.service';
-import { ErrorHandlingService } from './services/error-handling.service';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 
@@ -21,15 +20,14 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.authService.authRequired.subscribe(
-      doLogin => { 
+      authType => {
+        console.log("Logged in session is lost " + authType);
         this.router.navigateByUrl("login");
-        console.log("Logged in session is lost " + doLogin);
-        if (doLogin)
-          this.router.navigateByUrl("login");
-      })
-    this.petServic.deletePet(123)
-      .subscribe(
-        data => console.log(data)
-      );
+      });
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl("login");
   }
 }

@@ -30,7 +30,8 @@ import { LoginComponent } from './components/login/login.component';
     , AboutPetStoreComponent
     , PetEditorComponent
     , AlertComponent
-    , PetCardComponent, LoginComponent
+    , PetCardComponent
+    , LoginComponent
   ],
   imports: [
     BrowserModule

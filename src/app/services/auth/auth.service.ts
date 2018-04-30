@@ -12,11 +12,8 @@ export class AuthService {
   }
 
   login(username: string, password: string): void {
+    console.log("Storing credential into local storage for " + username)
     localStorage.setItem("auth", "Basic " + btoa(username + ":" + password));
-  }
-
-  gotoLogin(){
-
   }
 
   getBasicAuth(): string {

@@ -2,6 +2,7 @@
   <img *ngIf="pet.photoUrls" class="card-img-top pet-card-img" alt="{{pet.name}}" src="{{pet.photoUrls[0]}}" routerLink="/pets/{{pet.id}}">
   <div class="card-body">
     <h5 class="card-title">{{pet.name}}</h5>
+    <a *ngIf="pet.photoUrls && pet.photoUrls.length > 1" routerLink="/pets/{{pet.id}}"> There are {{pet.photoUrls.length - 1 }} more images to see</a>
     <span *ngIf="pet.tags && pet.tags.length > 0" class="card-text">You can also call it </span>
     <span class="badge badge-info" *ngFor="let tag of pet.tags"> {{tag.name}} </span>
   </div>

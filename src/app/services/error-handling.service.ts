@@ -14,7 +14,6 @@ export class ErrorHandlingService extends ErrorHandler {
     super.handleError(error);
     if (error instanceof HttpErrorResponse) {
       let errRes: HttpErrorResponse = (<HttpErrorResponse>error);
-      if(errRes.status == 400)
       this.authService.authRequired.next(true);
     }
   }
