@@ -13,11 +13,13 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor(public auth: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    request = request.clone({
-      setHeaders: {
-        Authorization: this.auth.getBasicAuth()
-      }
-    });
+    if (this.auth.getBasicAuth()) {
+      request = request.clone({
+        setHeaders: {
+          "Authorization": this.auth.getBasicAuth()
+        }
+      });
+    }
     return next.handle(request);
   }
 }

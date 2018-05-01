@@ -17,6 +17,10 @@ export class ApiGatewayService {
   constructor(private http: HttpClient) {
   }
 
+  logout(): Observable<ApiResponse<void>> {
+    return <Observable<ApiResponse<void>>>this.http.get(environment.urlBase + "/logout", httpOptions);
+  }
+
   doApiDELETE(path): Observable<ApiResponse<any>> {
     return <Observable<ApiResponse<any>>>this.http.delete(environment.urlBase + path, httpOptions);
   }

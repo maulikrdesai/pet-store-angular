@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  public authRequired:Subject<boolean> = new Subject<boolean>();
+  public authRequired:Subject<String> = new Subject<String>();
 
   constructor() {
   }
@@ -17,10 +17,13 @@ export class AuthService {
   }
 
   getBasicAuth(): string {
+    if(!localStorage.getItem("auth"))
+      console.error("Authentication is not provided yet to store");
     return localStorage.getItem("auth");
   }
 
   logout(): void {
     localStorage.removeItem("auth");
+    console.info("Authentication is removed from store");
   }
 }

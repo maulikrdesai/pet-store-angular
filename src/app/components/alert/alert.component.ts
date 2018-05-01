@@ -8,25 +8,19 @@ import { AlertService } from '../../services/alert.service';
     styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
-    alerts: Alert[] = [];
+    alert: Alert;
 
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
         this.alertService.getAlert().subscribe((alert: Alert) => {
-            if (!alert) {
-                // clear alerts when an empty alert is received
-                this.alerts = [];
-                return;
-            }
-
-            // add alert to array
-            this.alerts.push(alert);
+            this.alert=alert;
+            setTimeout(()=>this.alert=null,5000);
         });
     }
 
     removeAlert(alert: Alert) {
-        this.alerts = this.alerts.filter(x => x !== alert);
+        this.alert = null;
     }
 
     cssClass(alert: Alert) {
