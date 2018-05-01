@@ -23,14 +23,16 @@ export class PetListComponent implements OnInit {
   }
 
   initializeView() {
-    if (this.pets.length == 0)
+    if (this.pets.length == 0) {
+      console.warn("No pet available in the store. Force navigation to add-pet page.")
       this.router.navigateByUrl("add-pet");
+    }
   }
 
   onPetDeleted(deletedPet: Pet) {
     this.pets = this.pets.filter(pet => pet.id != deletedPet.id);
-    this.initializeView();
     console.log(deletedPet.name + "[" + deletedPet.id + "] is no longer exists.");
+    this.initializeView();
   }
 
   onPetSold(soldPet: Pet) {

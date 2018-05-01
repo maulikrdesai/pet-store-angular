@@ -8,7 +8,8 @@ import { AlertService } from './alert.service';
 export class ErrorHandlingService extends ErrorHandler {
 
   constructor(private authService: AuthService
-    , private alertService:AlertService) {
+    , private alertService: AlertService) {
+
     super();
   }
 

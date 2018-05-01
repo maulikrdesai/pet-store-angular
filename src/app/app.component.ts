@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
       });
   }
 
-  logout(){
-    this.authService.logout();
+  logout() {
+    this.authService.removeBearerAuth();
     this.apiGatewayService.logout().subscribe(data => this.alertService.success(data.message));
     this.router.navigateByUrl("login");
   }

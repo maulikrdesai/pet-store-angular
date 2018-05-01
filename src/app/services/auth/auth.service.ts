@@ -3,27 +3,39 @@ import { ApiGatewayService } from '../api-gateway.service';
 import { Observable } from 'rxjs/Observable';
 import { Pet } from '../../models/pet.store.models';
 import { Subject } from 'rxjs';
+import { UserPrincipal } from '../../models/api.models';
 
 @Injectable()
 export class AuthService {
-  public authRequired:Subject<String> = new Subject<String>();
+
+  private static AUTH_KEY: string = "userPrincipal";
+  public authRequired: Subject<String> = new Subject<String>();
 
   constructor() {
   }
 
-  login(username: string, password: string): void {
-    console.log("Storing credential into local storage for " + username)
-    localStorage.setItem("auth", "Basic " + btoa(username + ":" + password));
+  /***
+   * Stringify, Encrypt and Store userPrincipal as Bearer Token
+   */
+  storeBearerAuth(userPrincipal: UserPrincipal): void {
+    console.info("Persisting Bearer Authentication to Local-Storage", userPrincipal);
+    localStorage.setItem(AuthService.AUTH_KEY, "Bearer " + btoa(JSON.stringify(userPrincipal)));
   }
 
-  getBasicAuth(): string {
-    if(!localStorage.getItem("auth"))
-      console.error("Authentication is not provided yet to store");
-    return localStorage.getItem("auth");
+  /***
+   * Retrieve ready to use  Bearer token
+   */
+  getBearerAuth(): string {
+    if (!localStorage.getItem(AuthService.AUTH_KEY))
+      console.warn("Authentication is not provided yet to store");
+    return localStorage.getItem(AuthService.AUTH_KEY);
   }
 
-  logout(): void {
-    localStorage.removeItem("auth");
-    console.info("Authentication is removed from store");
+  /***
+   * Remove  Bearer token from the Storage
+   */
+  removeBearerAuth(): void {
+    localStorage.removeItem(AuthService.AUTH_KEY);
+    console.info("Removing Bearer Authentication to Local-Storage");
   }
 }

@@ -9,21 +9,19 @@ export class PetService {
 
   constructor(private apiGateway: ApiGatewayService) { }
 
-  getPets(category?: Category): Observable<ApiResponse<Pet[]>> {
-    if (category != null && category.id > 0)
-      return this.apiGateway.doApiGET("/pets?categoryId=" + category.id);
+  getPets(): Observable<ApiResponse<Pet[]>> {
     return this.apiGateway.doApiGET("/pets");
-  }
-
-  getPet(petId: number): Observable<ApiResponse<Pet>> {
-    return this.apiGateway.doApiGET("/pets/" + petId);
   }
 
   addPet(pet: Pet): Observable<ApiResponse<Pet>> {
     return this.apiGateway.doApiPOST("/pets/", pet);
   }
 
-  updatePet(petId:number, pet: Pet): Observable<ApiResponse<Pet>> {
+  getPet(petId: number): Observable<ApiResponse<Pet>> {
+    return this.apiGateway.doApiGET("/pets/" + petId);
+  }
+
+  updatePet(petId: number, pet: Pet): Observable<ApiResponse<Pet>> {
     return this.apiGateway.doApiPUT("/pets/" + petId, pet);
   }
 

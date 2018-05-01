@@ -4,3 +4,14 @@ export class ApiResponse<T> {
 	timestamp:Date;
 	result:T;
 }
+
+export class UserCredential{
+	username:String;
+	password:String;
+}
+
+export class UserPrincipal{
+	sessionId:String;
+	username:String;
+	roles:String[];
+}
