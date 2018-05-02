@@ -22,6 +22,10 @@ export class AuthService {
     localStorage.setItem(AuthService.AUTH_KEY, JSON.stringify(userPrincipal));
   }
 
+  isLoggedIn(){
+    return localStorage.getItem(AuthService.AUTH_KEY)!=null;
+  }
+
   /**
    * Check weather UserPrincipal has provided Role
    * @param role

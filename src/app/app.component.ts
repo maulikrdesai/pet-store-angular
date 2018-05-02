@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.authService.authRequired.subscribe(
       authType => {
+        this.alertService.info("Here is where you prove what you are");
         this.router.navigateByUrl("login");
       });
   }
@@ -31,6 +32,6 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.removeBearerAuth();
     this.apiGatewayService.logout().subscribe(data => this.alertService.success(data.message));
-    this.router.navigateByUrl("login");
+    this.router.navigateByUrl("pets");
   }
 }
