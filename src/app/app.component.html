@@ -5,7 +5,7 @@
             <li class="nav-item">
                 <a class="nav-link waves-light" routerLink="/pets" mdbWavesEffect>Pets</a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="authService.hasRole('admin')" class="nav-item">
                 <a class="nav-link waves-light" routerLink="/add-pet" mdbWavesEffect>Add Pet</a>
             </li>
             <li class="nav-item">

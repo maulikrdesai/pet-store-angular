@@ -15,7 +15,6 @@ export class AlertComponent {
     ngOnInit() {
         this.alertService.getAlert().subscribe((alert: Alert) => {
             this.alert=alert;
-            setTimeout(()=>this.alert=null,5000);
         });
     }
 

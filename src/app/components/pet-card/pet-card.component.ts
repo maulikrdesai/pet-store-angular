@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Pet } from '../../models/pet.store.models';
 import { PetService } from '../../services/pet.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'pet-card',
@@ -19,14 +20,15 @@ export class PetCardComponent implements OnInit {
   @Output()
   returned: EventEmitter<Pet> = new EventEmitter();
 
-  constructor(private router: Router, private petService: PetService) { }
+  constructor(private router: Router
+    , private petService: PetService
+    , private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   purchase() {
-    this.pet.status = "SOLD";
-    this.petService.updatePet(this.pet.id, this.pet).subscribe(
+    this.petService.purchase(this.pet.id, this.pet).subscribe(
       data => {
         this.pet = data.result;
         this.sold.emit(this.pet);
@@ -34,8 +36,7 @@ export class PetCardComponent implements OnInit {
   }
 
   return() {
-    this.pet.status = "AVAILABLE";
-    this.petService.updatePet(this.pet.id, this.pet).subscribe(
+    this.petService.return(this.pet.id, this.pet).subscribe(
       data => {
         this.pet = data.result;
         this.returned.emit(this.pet);

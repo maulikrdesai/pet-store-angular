@@ -9,7 +9,7 @@
   <div class="card-footer">
     <a *ngIf="pet.status=='AVAILABLE'" (click)="purchase()" class="btn btn-primary" >Purchase</a>
     <a *ngIf="pet.status=='SOLD'" (click)="return()" class="btn btn-primary" >Return</a>
-    <a (click)="delete()" class="btn btn-primary" >Delete</a>
-    <a routerLink="/edit-pet/{{pet.id}}" class="btn btn-primary">Edit</a>
+    <a *ngIf="authService.hasRole('admin')" (click)="delete()" class="btn btn-primary" >Delete</a>
+    <a *ngIf="authService.hasRole('admin')" routerLink="/edit-pet/{{pet.id}}" class="btn btn-primary">Edit</a>
   </div>
 </div>

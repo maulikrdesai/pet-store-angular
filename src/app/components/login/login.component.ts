@@ -19,10 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log("Logging User(" + this.username + ") into the Pet-Store");
     this.apiGatewayService.login(this.username, this.password).subscribe(
       data => {
         this.authService.storeBearerAuth(data.result);
-        this.router.navigateByUrl("");
+        this.router.navigateByUrl("pets");
       });
   }
 }

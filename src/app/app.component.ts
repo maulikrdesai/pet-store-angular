@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.authService.authRequired.subscribe(
       authType => {
-        console.log("Server has challenged user for " + authType + " Authentication");
         this.router.navigateByUrl("login");
       });
   }

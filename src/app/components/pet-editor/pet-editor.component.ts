@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pet, Category, AvailableCategories } from '../../models/pet.store.models';
 import { PetService } from '../../services/pet.service';
 import { debug } from 'util';
+import { AuthService } from '../../services/auth/auth.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'pet-editor',
@@ -15,9 +17,18 @@ export class PetEditorComponent implements OnInit {
   categories: Category[] = AvailableCategories;
   selectedCategoryId: number;
 
-  constructor(private route: ActivatedRoute, private petService: PetService) { }
+  constructor(private route: ActivatedRoute
+    , private router: Router
+    , private petService: PetService
+    , private authService: AuthService
+    , private alertService: AlertService) { }
 
   ngOnInit(): void {
+    if (!this.authService.hasRole('admin')) {
+      this.alertService.error("Only Administrators are allowed to Add/Edit the pet");
+      this.router.navigateByUrl("login");
+    };
+
     this.pet = new Pet();
     let id: number = +this.route.snapshot.paramMap.get('id');
     if (id > 0)

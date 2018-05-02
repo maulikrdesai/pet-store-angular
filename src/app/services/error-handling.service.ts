@@ -18,7 +18,7 @@ export class ErrorHandlingService extends ErrorHandler {
     if (error instanceof HttpErrorResponse) {
       let errRes: HttpErrorResponse = (<HttpErrorResponse>error);
       console.error(errRes.error.message);
-      if (errRes.status == 401)
+      if (errRes.status == 401 && errRes.headers.get("WWW-Authenticate"))
         this.authService.authRequired.next(errRes.headers.get("WWW-Authenticate"));
       else if (errRes.error.message != null)
         this.alertService.error(errRes.error.message);
